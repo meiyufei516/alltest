@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎！</title>
+</head>
+<body>
+    <div id="aaa">
+        <img alt="验证码" id="testCode"  onclick="changeCode()" th:src="@{/defaultKaptcha}" />
+    </div>
+    <input type="text" name="vrifyCode" id="vrifyCode"/>
+    <input type="button" value="提交" onclick="submitTestCode()"/>
+    <span id="returnMess" ></span>
+</body>
+<script th:src="@{/jquery.min.js}"></script>
+<script th:inline="javascript">
+    function changeCode(){
+        $("#aaa").html("");
+        $("#aaa").html("<img alt=\"验证码\" id=\"testCode\"  onclick=\"changeCode()\" src=\"/defaultKaptcha?d="+new Date()*1+"\" />");
+    }
+     function submitTestCode(){
+         $.post(/*[[@{/imgvrifyControllerDefaultKaptcha}]]*/,{vrifyCode:$("#vrifyCode").val()},function (result) {
+             if(result.code=='0'){
+                 $("#returnMess").text("");
+                 $("#returnMess").text("验证码正确！");
+                 $("#returnMess").attr("style","color: blue");
+             }else if(result.code=='1'){
+                 $("#returnMess").text("");
+                 $("#returnMess").text("验证码错误！");
+                 $("#returnMess").attr("style","color:red");
+             }else{
+                 $("#returnMess").text("");
+                 $("#returnMess").text("验证码不可为空！");
+                 $("#returnMess").attr("style","color:red");
+             }
+         });
+     }
+
+</script>
+</html>
