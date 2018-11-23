@@ -1,4 +1,4 @@
-package com.test.alltest.web.WChat;
+package com.test.alltest.web.wchat;
 
 import com.test.alltest.config.CashClass;
 import com.test.alltest.schedule.AutoGetAccessToken;
@@ -7,13 +7,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-public class CheckAccessToken {
+/**
+ * 检查access_token是否为空
+ * @author MeiYF
+ * @time 2018/11/23 16:29
+ **/
+public class CheckAccessTokenController {
 
-    private static final Logger logger= LoggerFactory.getLogger(CheckAccessToken.class);
-    /**
-     * 检查access_token是否为空
-     * @return
-     */
+    private static final Logger logger= LoggerFactory.getLogger(CheckAccessTokenController.class);
+
+
     public static int  checkAccessToken(){
         if(StringUtils.isEmpty(CashClass.access_token)){
             //如果access_token是空的就要去获取一次
